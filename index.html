@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Random Quote Machine</title>
+<style>
+  html,body{margin:0;padding:0;font-family:system-ui,Segoe UI,Arial,sans-serif;background:#f4f4f4;color:#222;}
+  .wrap{max-width:720px;margin:0 auto;padding:24px;}
+  button,.btn{cursor:pointer;font-size:15px;padding:8px 14px;border:1px solid #999;border-radius:4px;background:#fff;}
+  #fcc_test_foldout,#fcc_test_button,#fcc_test_suite_indicator_wrapper{z-index:9999;}
+</style>
+
+</head>
+<body>
+<div id="quote-box" style="width:80%;max-width:520px;margin:40px auto;background:#fff;border-radius:8px;padding:28px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.12);">
+  <blockquote id="text" style="font-size:22px;font-style:italic;margin:0 0 14px;min-height:44px;"></blockquote>
+  <p id="author" style="font-size:15px;margin:0 0 16px;"></p>
+  <button id="new-quote">New Quote</button>
+  <a id="tweet-quote" href="#" target="_blank" rel="noreferrer" style="color:#1d9bf0;margin-left:12px;text-decoration:none;font-weight:bold;">Tweet</a>
+</div>
+<script>
+(function () {
+  var quotes = [{"q":"The only way to do great work is to love what you do.","a":"Steve Jobs"},{"q":"In the middle of difficulty lies opportunity.","a":"Alfred Adler"},{"q":"It is what we do after we fail that defines us.","a":"Jim Rohn"},{"q":"Well begun is half done.","a":"Aristotle"},{"q":"The important thing is to keep on going.","a":"C.S. Lewis"},{"q":"Simplicity is the ultimate sophistication.","a":"Leonardo da Vinci"},{"q":"Success is not final, failure is not fatal.","a":"John Thompson"},{"q":"Act as if what you do makes a difference. It does.","a":"William James"},{"q":"The future belongs to those who believe in their dreams.","a":"Eleanor Roosevelt"},{"q":"What lies behind us and what lies before us are tiny matters.","a":"Ralph Waldo Emerson"}], cur = -1;
+  function set(i) {
+    document.getElementById('text').textContent = quotes[i].q;
+    document.getElementById('author').textContent = '\u2014 ' + quotes[i].a;
+    document.getElementById('tweet-quote').href = 'https://twitter.com/intent/tweet?text=' +
+      encodeURIComponent('\u201C' + quotes[i].q + '\u201D \u2014 ' + quotes[i].a);
+    cur = i;
+  }
+  set(Math.floor(Math.random() * quotes.length));
+  document.getElementById('new-quote').addEventListener('click', function () {
+    var i; do { i = Math.floor(Math.random() * quotes.length); } while (i === cur);
+    set(i);
+  });
+})();
+</script>
+<script>window.projectName = "random-quote-machine";</script>
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+</html>
